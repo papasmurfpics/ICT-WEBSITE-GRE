@@ -54,15 +54,15 @@ nav {
     background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
-    padding: 15px 0;
+    padding: 10px 0;
     z-index: 25;
 }
 
 nav a {
     color: var(--cyan);
     text-decoration: none;
-    font-size: 1.8rem;
-    margin: 0 30px;
+    font-size: 1.6rem;
+    margin: 0 25px;
     text-transform: uppercase;
 }
 
@@ -75,7 +75,7 @@ nav a:hover, nav a.active {
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 15px;
     border: 1px solid rgba(168, 216, 216, 0.3);
     background-color: var(--card-bg);
     box-shadow: 0 0 30px rgba(0,0,0,1), inset 0 0 20px var(--cyan-glow);
@@ -86,17 +86,17 @@ nav a:hover, nav a.active {
 .card-header {
     display: flex;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 8px 15px;
     border-bottom: 1px solid var(--cyan);
     background: rgba(168, 216, 216, 0.05);
 }
 
-.dashboard-content { display: flex; flex: 1; }
+.dashboard-content { display: flex; flex: 1; overflow: hidden; }
 
 .sidebar {
-    width: 320px;
+    width: 280px;
     border-right: 1px solid var(--cyan);
-    padding: 30px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -118,22 +118,21 @@ nav a:hover, nav a.active {
 
 .main-display {
     flex: 1;
-    padding: 40px;
-    font-size: 1.8rem;
+    padding: 30px;
+    font-size: 1.7rem;
     white-space: pre-wrap;
     text-shadow: 0 0 4px var(--cyan), 0 0 10px var(--cyan-glow);
-    position: relative; /* This is the anchor for the GIF */
-    overflow: hidden;    /* Keeps everything on one screen */
+    position: relative; /* Anchor for the absolute GIF */
+    overflow: hidden;    
 }
 
-/* NEWS TICKER ANIMATION */
 .news-ticker {
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
     border-top: 1px solid var(--cyan);
     overflow: hidden;
     white-space: nowrap;
-    padding: 10px 0;
+    padding: 8px 0;
 }
 
 .ticker-wrapper {
@@ -143,9 +142,9 @@ nav a:hover, nav a.active {
 }
 
 .ticker-wrapper span {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--cyan);
-    margin-right: 100px;
+    margin-right: 80px;
     text-shadow: 0 0 5px var(--cyan-glow);
 }
 
@@ -154,29 +153,25 @@ nav a:hover, nav a.active {
     100% { transform: translateX(-100%); }
 }
 
-h1 { font-size: 2.2rem; color: #fff; text-align: center; }
-.label { color: rgba(168, 216, 216, 0.6); font-size: 1.2rem; }
-footer { border-top: 1px solid var(--cyan); padding: 10px; text-align: center; font-size: 0.8rem; }
-}
-/* Custom GIF Styling */
+h1 { font-size: 1.8rem; color: #fff; text-align: center; margin: 10px 0; }
+.label { color: rgba(168, 216, 216, 0.6); font-size: 1rem; }
+footer { border-top: 1px solid var(--cyan); padding: 8px; text-align: center; font-size: 0.8rem; }
+
+/* --- GIF STYLING (FIXED) --- */
 .display-gif {
-    position: absolute;    /* Pins it to the container */
-    top: 20px;             /* Distance from the top */
-    right: 20px;           /* Distance from the right */
-    width: 120px;          /* Small-medium size so it doesn't crowd the text */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 130px; /* Medium Size */
     height: auto;
-    z-index: 10;           /* Keeps it on top */
-    
-    /* VISUALS */
+    z-index: 10;
     border: 1px solid var(--cyan);
-    box-shadow: 0 0 10px var(--cyan-glow);
+    box-shadow: 0 0 15px var(--cyan-glow);
     filter: grayscale(1) contrast(1.2) sepia(1) hue-rotate(140deg) brightness(1.1);
-    
-    /* ANIMATION */
     animation: scan-flicker 3s infinite alternate;
 }
 
 @keyframes scan-flicker {
     0% { opacity: 0.7; transform: scale(1); }
-    100% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1.03); }
 }
