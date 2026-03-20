@@ -3,177 +3,132 @@
 :root {
     --cyber-blue: #00e5ff;
     --bio-purple: #9d50bb;
-    --detroit-white: rgba(255, 255, 255, 0.85);
     --bg-base: #050a14; 
-    --glass-fill: rgba(255, 255, 255, 0.03);
-    --border-glow: rgba(0, 229, 255, 0.3);
 }
 
 html, body {
     margin: 0; padding: 0;
     width: 100%; height: 100%;
-    background-color: var(--bg-base);
-    background: 
-        radial-gradient(circle at 0% 0%, rgba(157, 80, 187, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 100% 100%, rgba(0, 229, 255, 0.15) 0%, transparent 40%),
-        linear-gradient(180deg, #050a14 0%, #0a111f 100%);
-    color: var(--detroit-white);
+    background: radial-gradient(circle at 0% 0%, rgba(157, 80, 187, 0.1) 0%, transparent 40%),
+                linear-gradient(180deg, #050a14 0%, #0a111f 100%);
+    color: rgba(255, 255, 255, 0.85);
     font-family: 'JetBrains Mono', monospace;
     overflow: hidden;
 }
 
-/* NAVIGATION */
 nav {
-    padding: 25px;
+    padding: 20px;
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 40px;
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 nav a {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Orbitron';
     color: rgba(255, 255, 255, 0.4);
     text-decoration: none;
     font-size: 0.8rem;
-    letter-spacing: 4px;
-    transition: 0.4s;
+    letter-spacing: 3px;
 }
 
-nav a:hover, nav a.active {
-    color: var(--cyber-blue);
-    text-shadow: 0 0 15px var(--cyber-blue);
-}
+nav a.active { color: var(--cyber-blue); }
 
-/* TERMINAL WINDOW */
 .terminal-window {
-    margin: 30px;
-    height: calc(100vh - 160px);
-    background: var(--glass-fill);
-    backdrop-filter: blur(30px);
+    margin: 20px;
+    height: calc(100vh - 140px);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-    position: relative; /* Anchor for absolute elements inside */
+    position: relative;
 }
 
 .card-header {
-    padding: 12px 25px;
-    background: rgba(0, 229, 255, 0.05);
-    border-bottom: 1px solid var(--border-glow);
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.3);
     color: var(--cyber-blue);
     font-size: 0.7rem;
-    letter-spacing: 3px;
     display: flex;
     justify-content: space-between;
 }
 
 .dashboard-content { display: flex; flex: 1; overflow: hidden; }
 
-/* SIDEBAR: Profile Picture */
 .sidebar {
-    width: 300px;
-    padding: 30px;
+    width: 260px;
+    padding: 20px;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(0, 0, 0, 0.2);
 }
 
 .photo-box {
     width: 100%;
-    border: 1px solid var(--border-glow);
-    background: #000;
-    margin-bottom: 20px;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    margin-bottom: 15px;
 }
 
-.photo-box img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: grayscale(0.2) brightness(1.1);
-}
+.photo-box img { width: 100%; height: auto; display: block; }
 
-/* MAIN DISPLAY: GIF Tucked to Top-Right */
 .main-display { 
     flex: 1; 
     padding: 40px; 
-    overflow-y: auto; 
-    position: relative; /* Crucial for absolute positioning of GIF */
+    position: relative; 
 }
 
 .scanner-container {
-    position: absolute; /* Forces it to stay on the right */
+    position: absolute;
     top: 40px;
     right: 40px;
-    width: 280px; 
-    height: 180px;
-    border: 1px solid var(--border-glow);
-    background: rgba(0, 0, 0, 0.5);
+    width: 260px;
+    height: 160px;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    background: #000;
     overflow: hidden;
-    z-index: 10;
 }
 
 .display-gif {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    mix-blend-mode: screen; 
-    opacity: 0.9;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    mix-blend-mode: screen;
 }
 
 .scanner-bar {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 2px;
     background: var(--cyber-blue);
-    box-shadow: 0 0 15px var(--cyber-blue);
-    animation: scan-line 3s linear infinite;
+    box-shadow: 0 0 10px var(--cyber-blue);
+    animation: scan 3s linear infinite;
 }
 
-@keyframes scan-line {
-    0% { top: 0; }
-    100% { top: 100%; }
+@keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+#typewriter-logs { 
+    font-size: 1rem; 
+    white-space: pre-wrap; 
+    max-width: 55%; 
 }
 
-/* TEXT AREA (Avoids GIF lane) */
-#typewriter-logs {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--detroit-white);
-    white-space: pre-wrap;
-    max-width: 60%; /* Keeps text from going under the GIF */
-    text-shadow: 0 0 5px rgba(0, 229, 255, 0.2);
-}
-
-.label { font-size: 0.6rem; color: var(--bio-purple); letter-spacing: 3px; }
-h1 { font-family: 'Orbitron'; font-size: 1.4rem; color: #fff; margin: 5px 0 15px 0; }
-
-/* TICKER */
 .news-ticker {
     width: 100%;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.6);
-    border-top: 1px solid var(--border-glow);
-    padding: 12px 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(0, 229, 255, 0.3);
+    padding: 10px 0;
 }
 
 .ticker-wrapper {
     display: inline-block;
     white-space: nowrap;
-    animation: ticker-scroll 30s linear infinite;
+    animation: scroll 30s linear infinite;
 }
 
-.ticker-wrapper span {
-    padding: 0 50px;
-    font-size: 0.75rem;
-    color: var(--cyber-blue);
-    text-shadow: 0 0 10px var(--cyber-blue);
-}
+.ticker-wrapper span { padding: 0 40px; font-size: 0.7rem; color: var(--cyber-blue); }
 
-@keyframes ticker-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-footer { padding: 15px; text-align: center; font-size: 0.6rem; opacity: 0.4; letter-spacing: 5px; }
+.label { font-size: 0.6rem; color: var(--bio-purple); letter-spacing: 2px; }
+h1 { font-family: 'Orbitron'; font-size: 1.1rem; color: #fff; margin: 5px 0; }
+footer { padding: 8px; text-align: center; font-size: 0.5rem; opacity: 0.4; }
