@@ -146,3 +146,37 @@ nav a.active {
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
 .label { font-size: 0.6rem; color: var(--bio-purple); letter-spacing: 2px; margin-top: 15px; }
+/* --- ABOUT PAGE SPECIFICS --- */
+.bio-section {
+    max-width: 60%;
+    font-family: 'Share Tech Mono';
+}
+
+.glow-text {
+    color: var(--cyber-blue);
+    text-shadow: 0 0 8px var(--cyber-glow);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.skills-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.skills-list li {
+    color: #fff;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    border-left: 2px solid var(--bio-purple);
+    padding-left: 15px;
+    transition: 0.3s;
+}
+
+.skills-list li:hover {
+    color: var(--cyber-blue);
+    border-left: 2px solid var(--cyber-blue);
+    transform: translateX(5px);
+}
