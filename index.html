@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal | Home</title>
+    <title>System Terminal</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="screen-reflection"></div>
     <nav>
         <a href="index.html" class="active">01_HOME</a>
         <a href="about.html">02_ABOUT</a>
         <a href="projects.html">03_PROJECTS</a>
     </nav>
+
     <div class="terminal-window">
         <header class="card-header">
             <div class="header-left">
@@ -21,14 +21,14 @@
                 <span id="live-clock" style="margin-left: 20px;">00:00:00</span>
             </div>
             <div class="header-right">
-                <span id="coordinates">LOC: 47.9188 N, 106.9175 E</span>
-                <span style="margin-left: 20px; color: #00e5ff;">STATUS: ONLINE</span>
+                <span>LOC: 47.9188 N, 106.9175 E</span>
             </div>
         </header>
+
         <div class="dashboard-content">
             <aside class="sidebar">
                 <div class="photo-box">
-                    <img src="images/profile.jpg" alt="Profile">
+                    <img src="images/profile.jpg" alt="Officer">
                 </div>
                 <div class="stats-box">
                     <p class="label">RANK: OFFICER</p>
@@ -36,14 +36,16 @@
                     <p class="label">ID: 12B67-PX-2026</p>
                 </div>
             </aside>
+
             <main class="main-display">
                 <div class="scanner-container">
-                    <img src="images/aeifj.gif" class="display-gif" alt="Scan">
+                    <img src="images/aeifj.gif" class="display-gif" alt="Scanner">
                     <div class="scanner-bar"></div>
                 </div>
                 <div id="typewriter-logs"></div>
             </main>
         </div>
+
         <div class="news-ticker">
             <div class="ticker-wrapper">
                 <span>>> [ALERT] SHADOW-NET PROTOCOL ACTIVATED. <<</span>
@@ -52,8 +54,8 @@
                 <span>>> [DATA] CORPORATE ENCRYPTION BREACH DETECTED. <<</span>
             </div>
         </div>
-        <footer>PROPERTY_OF_ULAANBAATAR_POLICE_DEPT</footer>
     </div>
+
     <script>
       const terminal = document.getElementById('typewriter-logs');
       const text = "> INITIALIZING... [OK]\n> SCANNING UPLINKS...\n> WELCOME, OFFICER SUVD!\n\n> INTEL FEED: CONNECTED\n> STANDING BY...";
@@ -66,6 +68,7 @@
         }
       }
       setTimeout(typeWriter, 1000);
+
       function updateClock() {
         const now = new Date();
         document.getElementById('live-clock').innerText = "SYS_TIME: " + now.toLocaleTimeString();
