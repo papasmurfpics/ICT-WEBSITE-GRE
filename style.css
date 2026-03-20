@@ -180,3 +180,41 @@ nav a.active {
     border-left: 2px solid var(--cyber-blue);
     transform: translateX(5px);
 }
+/* --- ABOUT PAGE SPECIFIC GLOWS --- */
+.bio-section {
+    max-width: 55%; /* Keep text away from the GIF on the right */
+    margin-top: 10px;
+}
+
+.glow-text {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--cyber-blue);
+    text-shadow: 0 0 10px var(--cyber-glow);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.skills-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.skills-list li {
+    font-family: 'Share Tech Mono', monospace;
+    color: #fff;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    padding-left: 15px;
+    border-left: 2px solid var(--bio-purple);
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.skills-list li:hover {
+    color: var(--cyber-blue);
+    border-left: 2px solid var(--cyber-blue);
+    text-shadow: 0 0 10px var(--cyber-glow);
+    transform: translateX(8px);
+    background: rgba(0, 229, 255, 0.05);
+}
