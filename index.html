@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminal | Home</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="screen-reflection"></div>
-    
     <nav>
         <a href="index.html" class="active" onmouseover="playHover()">01_HOME</a>
         <a href="about.html" onmouseover="playHover()">02_ABOUT</a>
@@ -19,42 +18,43 @@
         <header class="card-header">
             <div class="header-left">
                 <span class="glitch-text">SYSTEM_OS [VER_12.0]</span>
-                <span id="live-clock" style="margin-left: 20px; color: #fff;">00:00:00</span>
+                <span id="live-clock" style="margin-left: 20px;">00:00:00</span>
             </div>
             <div class="header-right">
                 <span id="coordinates">LOC: 47.9188° N, 106.9175° E</span>
-                <span style="margin-left: 20px;">STATUS: ONLINE</span>
+                <span style="margin-left: 20px; color: var(--cyber-blue);">STATUS: ONLINE</span>
             </div>
         </header>
 
         <div class="dashboard-content">
             <aside class="sidebar">
                 <div class="photo-box">
-                    <img src="images/profile.jpg" alt="Profile">
+                    <img src="images/aeifj.gif" class="display-gif" id="scanner-gif" alt="System Scan">
                     <div class="scanline-overlay"></div>
                 </div>
                 <div class="stats-box">
                     <p class="label">RANK: OFFICER</p>
                     <h1>SUVD ERDENETSOGT</h1>
                     <p class="label">ID: 12B67-PX-2026</p>
+                    <div class="android-status">
+                        <p class="label">SOFTWARE_INSTABILITY</p>
+                        <div class="progress-bar"><div class="fill" style="width: 4%;"></div></div>
+                    </div>
                 </div>
             </aside>
 
             <main class="main-display">
-                <img src="images/aeifj.gif" class="display-gif" id="scanner-gif" alt="System Scan">
-                
                 <div id="typewriter-logs"></div>
             </main>
         </div>
 
         <div class="news-ticker">
             <div class="ticker-wrapper">
-                <span>>> [ALERT] SHADOW-NET PROTOCOL ACTIVATED. ALL UNREGISTERED NETRUNNERS WILL BE FLUSHED. <<</span>
-                <span>>> [NEWS] ARASAKA-MILITECH MERGER TALKS COLLAPSE; SECTOR 4 REMAINS UNDER MARTIAL LAW. <<</span>
-                <span>>> [WEATHER] ACID RAIN EXPECTED IN UPPER CITY. CHROME PLATING OXIDATION RISK: 85%. <<</span>
-                <span>>> [AD] UPGRADE YOUR EYES! KIROSHI 'REAL-SKIN' BD-READY OPTICS NOW 50% OFF. <<</span>
-                <span>>> [URGENT] MAX-TAC UNITS DEPLOYED TO NEO-KYOTO DISTRICT. AVOID ALL NEON-LIT ALLEYWAYS. <<</span>
-                <span>>> [DATA] CORPORATE ENCRYPTION BREACH DETECTED IN SUB-LEVEL 9. SECURITY TEAMS DISPATCHED. <<</span>
+                <span>>> [ALERT] SHADOW-NET PROTOCOL ACTIVATED. <<</span>
+                <span>>> [NEWS] ARASAKA-MILITECH MERGER TALKS COLLAPSE. <<</span>
+                <span>>> [WEATHER] ACID RAIN EXPECTED IN UPPER CITY. <<</span>
+                <span>>> [AD] UPGRADE YOUR EYES! KIROSHI OPTICS 50% OFF. <<</span>
+                <span>>> [DATA] CORPORATE ENCRYPTION BREACH DETECTED. <<</span>
             </div>
         </div>
 
@@ -96,18 +96,10 @@
 
       function updateClock() {
         const now = new Date();
-        const timeString = now.getHours().toString().padStart(2, '0') + ":" + 
-                           now.getMinutes().toString().padStart(2, '0') + ":" + 
-                           now.getSeconds().toString().padStart(2, '0');
-        document.getElementById('live-clock').innerText = "SYS_TIME: " + timeString;
+        document.getElementById('live-clock').innerText = "SYS_TIME: " + now.toLocaleTimeString();
       }
       setInterval(updateClock, 1000);
       updateClock();
-
-      setInterval(() => {
-        const coords = document.getElementById('coordinates');
-        coords.style.opacity = Math.random() > 0.95 ? "0.3" : "1";
-      }, 80);
     </script>
 </body>
 </html>
