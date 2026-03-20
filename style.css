@@ -6,113 +6,113 @@
     --card-bg: #11181e;
 }
 
-/* 1. Make the body fill the entire screen */
-body {
+/* Forces the browser to use every pixel available */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     background-color: var(--dark);
     color: var(--cyan);
     font-family: 'VT323', monospace;
-    margin: 0;
-    padding: 0;
-    height: 100vh; /* Full viewport height */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* Prevents scrollbars for that "App" feel */
+    overflow-x: hidden; /* Prevents side-scrolling */
 }
 
-/* 2. Full-width Navigation */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 1. Full-Width Navigation */
 nav {
+    width: 100%;
     border-bottom: 2px solid var(--cyan);
-    padding: 15px;
     background: rgba(168, 216, 216, 0.05);
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    padding: 20px 0;
+    box-sizing: border-box;
 }
 
 nav a {
     color: var(--cyan);
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    margin: 0 30px;
     text-transform: uppercase;
-    letter-spacing: 3px;
 }
 
-nav a:hover, nav a.active {
+nav a.active {
+    color: #fff;
     text-shadow: 0 0 10px var(--cyan);
-    background: var(--cyan);
-    color: var(--dark);
-    padding: 0 10px;
 }
 
-/* 3. The Main Terminal Container (Full Screen) */
+/* 2. The Full-Screen Terminal Window */
 .terminal-window {
-    flex: 1; /* Fills the rest of the screen height */
-    margin: 20px;
-    border: 2px solid var(--cyan);
-    background-color: var(--card-bg);
+    flex-grow: 1; /* This pushes the window to the bottom of the screen */
     display: flex;
     flex-direction: column;
-    box-shadow: inset 0 0 20px rgba(168, 216, 216, 0.1);
+    margin: 10px; /* Small gap from the edge for aesthetic */
+    border: 2px solid var(--cyan);
+    background-color: var(--card-bg);
 }
 
+/* Header bar across the top */
 .card-header {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
     border-bottom: 1px solid var(--cyan);
-    font-size: 1.2rem;
+    box-sizing: border-box;
     background: rgba(168, 216, 216, 0.1);
 }
 
-/* 4. Split Layout for wide screens */
+/* 3. The Main Content Area */
 .dashboard-content {
     display: flex;
-    flex: 1; /* Fills vertical space */
+    flex: 1; /* Fills all remaining vertical space */
 }
 
+/* Left Sidebar */
 .sidebar {
-    width: 300px;
+    width: 350px; /* Fixed width for profile info */
     border-right: 1px solid var(--cyan);
-    padding: 20px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
+/* Right Main Display */
 .main-display {
-    flex: 1;
-    padding: 40px;
-    font-size: 1.5rem;
-    line-height: 1.4;
-    text-transform: uppercase;
+    flex: 1; /* This takes up ALL remaining horizontal space */
+    padding: 50px;
+    font-size: 1.6rem;
 }
 
-/* Image styling */
+/* Photo Styling */
 .photo-box img {
     width: 100%;
-    max-width: 250px;
     border: 1px solid var(--cyan);
     filter: grayscale(1) contrast(1.5) sepia(1) hue-rotate(140deg);
 }
 
-.stats-box {
-    margin-top: 20px;
-    width: 100%;
-    text-align: left;
+.stats-box h1 {
+    font-size: 3rem;
+    color: white;
+    margin: 10px 0;
 }
 
-.stats-box h1 { margin: 0; color: #fff; font-size: 2.5rem; }
-
 footer {
+    width: 100%;
     border-top: 1px solid var(--cyan);
     padding: 10px;
     text-align: center;
-    font-size: 1rem;
-    letter-spacing: 5px;
+    letter-spacing: 10px;
 }
 
-/* Mobile Fix: Stack elements on small screens */
-@media (max-width: 768px) {
-    .dashboard-content { flex-direction: column; overflow-y: auto; }
+/* Fix for Phones: Stack them instead of side-by-side */
+@media (max-width: 900px) {
+    .dashboard-content { flex-direction: column; }
     .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--cyan); }
-    body { overflow: auto; }
 }
