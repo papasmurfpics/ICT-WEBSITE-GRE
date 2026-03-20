@@ -52,6 +52,7 @@ nav a {
     font-size: 1.8rem;
     margin: 0 30px;
     text-transform: uppercase;
+    transition: all 0.2s ease;
 }
 
 nav a:hover, nav a.active {
@@ -76,7 +77,6 @@ nav a:hover, nav a.active {
     border-bottom: 1px solid var(--cyan);
     background: rgba(168, 216, 216, 0.1);
     font-size: 1.1rem;
-    letter-spacing: 1px;
 }
 
 .header-left, .header-right {
