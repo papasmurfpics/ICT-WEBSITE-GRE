@@ -88,7 +88,6 @@ nav a:hover, nav a.active {
     justify-content: space-between;
     padding: 8px 15px;
     border-bottom: 1px solid var(--cyan);
-    background: rgba(168, 216, 216, 0.05);
 }
 
 .dashboard-content { display: flex; flex: 1; overflow: hidden; }
@@ -122,8 +121,27 @@ nav a:hover, nav a.active {
     font-size: 1.7rem;
     white-space: pre-wrap;
     text-shadow: 0 0 4px var(--cyan), 0 0 10px var(--cyan-glow);
-    position: relative; /* Anchor for the absolute GIF */
+    position: relative; /* REQUIRED: Anchor for the GIF */
     overflow: hidden;    
+}
+
+/* GIF STYLING */
+.display-gif {
+    position: absolute;
+    top: 20px;
+    right: 20px;    /* Pinned to the right */
+    width: 125px;   /* Medium-Small size */
+    height: auto;
+    z-index: 10;
+    border: 1px solid var(--cyan);
+    box-shadow: 0 0 15px var(--cyan-glow);
+    filter: grayscale(1) contrast(1.2) sepia(1) hue-rotate(140deg) brightness(1.1);
+    animation: scan-flicker 3s infinite alternate;
+}
+
+@keyframes scan-flicker {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.03); }
 }
 
 .news-ticker {
@@ -145,7 +163,6 @@ nav a:hover, nav a.active {
     font-size: 1.2rem;
     color: var(--cyan);
     margin-right: 80px;
-    text-shadow: 0 0 5px var(--cyan-glow);
 }
 
 @keyframes ticker {
@@ -156,22 +173,3 @@ nav a:hover, nav a.active {
 h1 { font-size: 1.8rem; color: #fff; text-align: center; margin: 10px 0; }
 .label { color: rgba(168, 216, 216, 0.6); font-size: 1rem; }
 footer { border-top: 1px solid var(--cyan); padding: 8px; text-align: center; font-size: 0.8rem; }
-
-/* --- GIF STYLING (FIXED) --- */
-.display-gif {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 130px; /* Medium Size */
-    height: auto;
-    z-index: 10;
-    border: 1px solid var(--cyan);
-    box-shadow: 0 0 15px var(--cyan-glow);
-    filter: grayscale(1) contrast(1.2) sepia(1) hue-rotate(140deg) brightness(1.1);
-    animation: scan-flicker 3s infinite alternate;
-}
-
-@keyframes scan-flicker {
-    0% { opacity: 0.7; transform: scale(1); }
-    100% { opacity: 1; transform: scale(1.03); }
-}
