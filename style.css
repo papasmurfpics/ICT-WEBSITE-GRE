@@ -1,179 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
-:root {
-    --cyan: #a8d8d8;
-    --cyan-glow: rgba(168, 216, 216, 0.4);
-    --dark: #050505;
-    --card-bg: #0c1216;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
+/* News Ticker Styling */
+.news-ticker {
     width: 100%;
-    height: 100%;
-    background-color: var(--dark);
-    color: var(--cyan);
-    font-family: 'VT323', monospace;
-    overflow: hidden;
-    /* Vignette effect: Darker corners for realism */
-    background: radial-gradient(circle, #0e1a1a 0%, #050505 100%);
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Glass Reflection Layer */
-.screen-reflection {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 50%);
-    pointer-events: none;
-    z-index: 20;
-}
-
-/* CRT Scanline & Jitter Effect */
-body::before {
-    content: " ";
-    display: block;
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    z-index: 15;
-    background-size: 100% 2px, 3px 100%;
-    pointer-events: none;
-    animation: jitter 0.2s infinite;
-}
-
-@keyframes jitter {
-    0% { transform: translate(0,0); }
-    50% { transform: translate(0.5px, 0.5px); }
-    100% { transform: translate(-0.5px, -0.5px); }
-}
-
-nav {
-    width: 100%;
-    border-bottom: 2px solid var(--cyan);
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    padding: 15px 0;
-    z-index: 25;
-}
-
-nav a {
-    color: var(--cyan);
-    text-decoration: none;
-    font-size: 1.8rem;
-    margin: 0 30px;
-    text-transform: uppercase;
-    /* Chromatic Aberration on Hover */
-    transition: all 0.1s;
-}
-
-nav a:hover, nav a.active {
-    color: #fff;
-    text-shadow: 2px 0 10px rgba(255,0,0,0.5), -2px 0 10px rgba(0,255,255,0.5);
-}
-
-.terminal-window {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-    border: 1px solid rgba(168, 216, 216, 0.3);
-    background-color: var(--card-bg);
-    box-shadow: 0 0 30px rgba(0,0,0,1), inset 0 0 20px var(--cyan-glow);
-    position: relative;
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border-bottom: 1px solid var(--cyan);
     background: rgba(168, 216, 216, 0.05);
-}
-
-.dashboard-content {
-    display: flex;
-    flex: 1;
-}
-
-.sidebar {
-    width: 320px;
-    border-right: 1px solid var(--cyan);
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    background: rgba(0,0,0,0.2);
-}
-
-.photo-box {
-    position: relative;
-    width: 100%;
-    border: 1px solid var(--cyan);
-    overflow: hidden;
-    background: #000;
-}
-
-.photo-box img {
-    width: 100%;
-    height: auto; 
-    display: block;
-    filter: grayscale(1) contrast(1.4) brightness(0.8) sepia(1) hue-rotate(140deg);
-}
-
-.photo-box::after {
-    content: "";
-    position: absolute;
-    top: -100%; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, transparent, rgba(168, 216, 216, 0.2), transparent);
-    animation: scan 6s linear infinite;
-}
-
-@keyframes scan {
-    0% { top: -100%; }
-    100% { top: 100%; }
-}
-
-.main-display {
-    flex: 1;
-    padding: 40px;
-    font-size: 1.8rem;
-    white-space: pre-wrap;
-    /* Real CRT Glow Effect */
-    text-shadow: 0 0 4px var(--cyan), 0 0 10px var(--cyan-glow);
-}
-
-h1 {
-    font-size: 2.2rem;
-    color: #fff;
-    margin: 15px 0;
-    text-align: center;
-    letter-spacing: 2px;
-}
-
-.label {
-    color: rgba(168, 216, 216, 0.6);
-    font-size: 1.2rem;
-    margin-bottom: 0;
-}
-
-footer {
     border-top: 1px solid var(--cyan);
-    padding: 10px;
-    text-align: center;
-    font-size: 0.8rem;
-    background: rgba(0,0,0,0.4);
+    overflow: hidden; /* Hides the text when it goes out of the box */
+    white-space: nowrap;
+    padding: 5px 0;
 }
 
-/* Response for small screens */
-@media (max-width: 800px) {
-    .dashboard-content { flex-direction: column; overflow-y: auto; }
-    .sidebar { width: auto; border-right: none; }
-    body { overflow: auto; }
+.ticker-wrapper {
+    display: inline-block;
+    padding-left: 100%; /* Starts the text off-screen to the right */
+    animation: ticker 30s linear infinite; /* Adjust '30s' to change speed */
+}
+
+.ticker-wrapper span {
+    font-size: 1.2rem;
+    color: var(--cyan);
+    margin-right: 50px; /* Space between news items */
+    text-shadow: 0 0 5px var(--cyan-glow);
+}
+
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Optional: Make the first word [BREAKING] or [ALERT] red for extra realism */
+.ticker-wrapper span:nth-child(even) {
+    color: #ff5555;
+    text-shadow: 0 0 5px rgba(255, 85, 85, 0.5);
 }
