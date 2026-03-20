@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono&display=swap');
 
 :root {
     --cyber-blue: #00e5ff;
     --bio-purple: #9d50bb;
-    --bg-base: #050a14; 
 }
 
 html, body {
     margin: 0; padding: 0;
     width: 100%; height: 100%;
+    background: #050a14;
     background: radial-gradient(circle at 0% 0%, rgba(157, 80, 187, 0.1) 0%, transparent 40%),
                 linear-gradient(180deg, #050a14 0%, #0a111f 100%);
     color: rgba(255, 255, 255, 0.85);
@@ -49,7 +49,7 @@ nav a.active { color: var(--cyber-blue); }
 
 .card-header {
     padding: 10px 20px;
-    border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+    border-bottom: 1px solid var(--cyber-blue);
     color: var(--cyber-blue);
     font-size: 0.7rem;
     display: flex;
@@ -61,13 +61,14 @@ nav a.active { color: var(--cyber-blue); }
 .sidebar {
     width: 260px;
     padding: 20px;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .photo-box {
     width: 100%;
-    border: 1px solid rgba(0, 229, 255, 0.3);
+    border: 1px solid var(--cyber-blue);
     margin-bottom: 15px;
+    background: #000;
 }
 
 .photo-box img { width: 100%; height: auto; display: block; }
@@ -78,13 +79,14 @@ nav a.active { color: var(--cyber-blue); }
     position: relative; 
 }
 
+/* GIF LOCKED TO TOP RIGHT */
 .scanner-container {
     position: absolute;
     top: 40px;
     right: 40px;
     width: 260px;
     height: 160px;
-    border: 1px solid rgba(0, 229, 255, 0.3);
+    border: 1px solid var(--cyber-blue);
     background: #000;
     overflow: hidden;
 }
@@ -115,7 +117,7 @@ nav a.active { color: var(--cyber-blue); }
     width: 100%;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.5);
-    border-top: 1px solid rgba(0, 229, 255, 0.3);
+    border-top: 1px solid var(--cyber-blue);
     padding: 10px 0;
 }
 
@@ -131,4 +133,3 @@ nav a.active { color: var(--cyber-blue); }
 
 .label { font-size: 0.6rem; color: var(--bio-purple); letter-spacing: 2px; }
 h1 { font-family: 'Orbitron'; font-size: 1.1rem; color: #fff; margin: 5px 0; }
-footer { padding: 8px; text-align: center; font-size: 0.5rem; opacity: 0.4; }
