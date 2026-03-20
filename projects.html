@@ -5,6 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminal | Projects</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for the project list navigation */
+        .project-link {
+            cursor: pointer;
+            color: #fff;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid transparent;
+            transition: 0.2s;
+            display: block;
+            text-decoration: none;
+        }
+
+        .project-link:hover {
+            background: rgba(168, 216, 216, 0.2);
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+        }
+
+        #project-scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            margin-top: 20px;
+            padding-right: 10px;
+        }
+
+        /* Custom scrollbar for the project list */
+        #project-scroll-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        #project-scroll-container::-webkit-scrollbar-thumb {
+            background: var(--cyan);
+        }
+
+        #back-btn {
+            display: none;
+            background: none;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            font-family: 'VT323';
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+        
+        #back-btn:hover {
+            background: var(--cyan);
+            color: var(--dark);
+        }
+    </style>
 </head>
 <body>
     <div class="screen-reflection"></div>
@@ -26,6 +77,7 @@
                 <span style="margin-left: 20px;">STORAGE: 92%</span>
             </div>
         </header>
+
         <div class="dashboard-content">
             <aside class="sidebar">
                 <h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--cyan); width: 100%; text-align: center; padding-bottom: 10px;">FILE_INFO</h2>
@@ -40,15 +92,22 @@
                     <p id="meta-status">> INACTIVE</p>
                 </div>
             </aside>
+
             <main class="main-display">
                 <div id="typewriter-projects"></div>
-                <div id="project-list" style="margin-top: 20px; display: none;">
-                    <p style="cursor: pointer; color: #fff;" onclick="loadProject(1)">[📂] PROJECT_ALPHA_WEBSITE</p>
-                    <p style="cursor: pointer; color: #fff;" onclick="loadProject(2)">[📂] DATABASE_MANAGEMENT_SYS</p>
-                    <p style="cursor: pointer; color: #fff;" onclick="loadProject(3)">[📂] PYTHON_SECURITY_SCRIPT</p>
+                
+                <div id="project-scroll-container">
+                    <div id="project-list" style="display: none;">
+                        <div class="project-link" onclick="loadProject(1)">[📂] PROJECT_ALPHA_WEBSITE</div>
+                        <div class="project-link" onclick="loadProject(2)">[📂] DATABASE_MANAGEMENT_SYS</div>
+                        <div class="project-link" onclick="loadProject(3)">[📂] PYTHON_SECURITY_SCRIPT</div>
+                        </div>
+
+                    <button id="back-btn" onclick="showList()">[ RETURN_TO_DIRECTORY ]</button>
                 </div>
             </main>
         </div>
+
         <footer>PROPERTY_OF_ULAANBAATAR_POLICE_DEPT_DETECTION_UNIT</footer>
     </div>
 
@@ -62,6 +121,7 @@
 
       const terminal = document.getElementById('typewriter-projects');
       const list = document.getElementById('project-list');
+      const backBtn = document.getElementById('back-btn');
       
       const welcomeText = "> SCANNING_STORAGE_DRIVE... [OK]\n" +
                           "> FOUND 3 DOCUMENTS IN DIRECTORY.\n" +
@@ -78,18 +138,19 @@
           i++;
           setTimeout(typeWriter, 30);
         } else {
-            // Show the list of projects once typing is done
             list.style.display = 'block';
         }
       }
       setTimeout(typeWriter, 1000);
 
-      // Function to "Load" project details when clicked
       function loadProject(id) {
           selectSound.play().catch(e => {});
           const metaName = document.getElementById('meta-name');
           const metaDate = document.getElementById('meta-date');
           const metaStatus = document.getElementById('meta-status');
+          
+          list.style.display = 'none';
+          backBtn.style.display = 'block';
           
           if(id === 1) {
               terminal.innerText = "> LOADING: PROJECT_ALPHA...\n\nThis is my first ICT Web Project. It uses a custom CSS grid and retro terminal aesthetics to display user data.";
@@ -107,6 +168,17 @@
               metaDate.innerText = "> 10/03/2026";
               metaStatus.innerText = "> ENCRYPTED";
           }
+      }
+
+      function showList() {
+          backBtn.style.display = 'none';
+          terminal.innerText = welcomeText;
+          list.style.display = 'block';
+          
+          // Reset meta info
+          document.getElementById('meta-name').innerText = "> NONE";
+          document.getElementById('meta-date').innerText = "> --/--/----";
+          document.getElementById('meta-status').innerText = "> INACTIVE";
       }
 
       function playHover() {
