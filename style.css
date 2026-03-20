@@ -177,36 +177,3 @@ footer {
     .sidebar { width: auto; border-right: none; }
     body { overflow: auto; }
 }
-/* News Ticker Styling */
-.news-ticker {
-    width: 100%;
-    background: rgba(168, 216, 216, 0.05);
-    border-top: 1px solid var(--cyan);
-    overflow: hidden; /* Hides the text when it goes out of the box */
-    white-space: nowrap;
-    padding: 5px 0;
-}
-
-.ticker-wrapper {
-    display: inline-block;
-    padding-left: 100%; /* Starts the text off-screen to the right */
-    animation: ticker 30s linear infinite; /* Adjust '30s' to change speed */
-}
-
-.ticker-wrapper span {
-    font-size: 1.2rem;
-    color: var(--cyan);
-    margin-right: 50px; /* Space between news items */
-    text-shadow: 0 0 5px var(--cyan-glow);
-}
-
-@keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
-
-/* Optional: Make the first word [BREAKING] or [ALERT] red for extra realism */
-.ticker-wrapper span:nth-child(even) {
-    color: #ff5555;
-    text-shadow: 0 0 5px rgba(255, 85, 85, 0.5);
-}
