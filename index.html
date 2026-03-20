@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="screen-reflection"></div>
+    
     <nav>
         <a href="index.html" class="active" onmouseover="playHover()">01_HOME</a>
         <a href="about.html" onmouseover="playHover()">02_ABOUT</a>
@@ -29,21 +31,22 @@
         <div class="dashboard-content">
             <aside class="sidebar">
                 <div class="photo-box">
-                    <img src="images/aeifj.gif" class="display-gif" id="scanner-gif" alt="System Scan">
+                    <img src="images/profile.jpg" alt="Profile">
                     <div class="scanline-overlay"></div>
                 </div>
                 <div class="stats-box">
                     <p class="label">RANK: OFFICER</p>
                     <h1>SUVD ERDENETSOGT</h1>
                     <p class="label">ID: 12B67-PX-2026</p>
-                    <div class="android-status">
-                        <p class="label">SOFTWARE_INSTABILITY</p>
-                        <div class="progress-bar"><div class="fill" style="width: 4%;"></div></div>
-                    </div>
                 </div>
             </aside>
 
             <main class="main-display">
+                <div class="scanner-container">
+                    <img src="images/aeifj.gif" class="display-gif" id="scanner-gif" alt="System Scan">
+                    <div class="scanner-bar"></div>
+                </div>
+                
                 <div id="typewriter-logs"></div>
             </main>
         </div>
@@ -96,7 +99,10 @@
 
       function updateClock() {
         const now = new Date();
-        document.getElementById('live-clock').innerText = "SYS_TIME: " + now.toLocaleTimeString();
+        const timeString = now.getHours().toString().padStart(2, '0') + ":" + 
+                           now.getMinutes().toString().padStart(2, '0') + ":" + 
+                           now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('live-clock').innerText = "SYS_TIME: " + timeString;
       }
       setInterval(updateClock, 1000);
       updateClock();
