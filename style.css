@@ -85,9 +85,12 @@ nav a.active {
 
 /* Right Main Display */
 .main-display {
-    flex: 1; /* This takes up ALL remaining horizontal space */
-    padding: 50px;
+    flex: 1;
+    padding: 40px;
     font-size: 1.6rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Photo Styling */
