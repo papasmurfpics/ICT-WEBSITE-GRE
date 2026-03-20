@@ -16,16 +16,11 @@ html, body {
     color: var(--cyan);
     font-family: 'VT323', monospace;
     overflow: hidden;
-    /* Vignette effect: Darker corners for realism */
     background: radial-gradient(circle, #0e1a1a 0%, #050505 100%);
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
+body { display: flex; flex-direction: column; }
 
-/* Glass Reflection Layer */
 .screen-reflection {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -34,7 +29,6 @@ body {
     z-index: 20;
 }
 
-/* CRT Scanline & Jitter Effect */
 body::before {
     content: " ";
     display: block;
@@ -70,8 +64,6 @@ nav a {
     font-size: 1.8rem;
     margin: 0 30px;
     text-transform: uppercase;
-    /* Chromatic Aberration on Hover */
-    transition: all 0.1s;
 }
 
 nav a:hover, nav a.active {
@@ -88,6 +80,7 @@ nav a:hover, nav a.active {
     background-color: var(--card-bg);
     box-shadow: 0 0 30px rgba(0,0,0,1), inset 0 0 20px var(--cyan-glow);
     position: relative;
+    overflow: hidden;
 }
 
 .card-header {
@@ -98,10 +91,7 @@ nav a:hover, nav a.active {
     background: rgba(168, 216, 216, 0.05);
 }
 
-.dashboard-content {
-    display: flex;
-    flex: 1;
-}
+.dashboard-content { display: flex; flex: 1; }
 
 .sidebar {
     width: 320px;
@@ -109,7 +99,6 @@ nav a:hover, nav a.active {
     padding: 30px;
     display: flex;
     flex-direction: column;
-    background: rgba(0,0,0,0.2);
 }
 
 .photo-box {
@@ -127,53 +116,42 @@ nav a:hover, nav a.active {
     filter: grayscale(1) contrast(1.4) brightness(0.8) sepia(1) hue-rotate(140deg);
 }
 
-.photo-box::after {
-    content: "";
-    position: absolute;
-    top: -100%; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, transparent, rgba(168, 216, 216, 0.2), transparent);
-    animation: scan 6s linear infinite;
-}
-
-@keyframes scan {
-    0% { top: -100%; }
-    100% { top: 100%; }
-}
-
 .main-display {
     flex: 1;
     padding: 40px;
     font-size: 1.8rem;
     white-space: pre-wrap;
-    /* Real CRT Glow Effect */
     text-shadow: 0 0 4px var(--cyan), 0 0 10px var(--cyan-glow);
 }
 
-h1 {
-    font-size: 2.2rem;
-    color: #fff;
-    margin: 15px 0;
-    text-align: center;
-    letter-spacing: 2px;
-}
-
-.label {
-    color: rgba(168, 216, 216, 0.6);
-    font-size: 1.2rem;
-    margin-bottom: 0;
-}
-
-footer {
+/* NEWS TICKER ANIMATION */
+.news-ticker {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
     border-top: 1px solid var(--cyan);
-    padding: 10px;
-    text-align: center;
-    font-size: 0.8rem;
-    background: rgba(0,0,0,0.4);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
 }
 
-/* Response for small screens */
-@media (max-width: 800px) {
-    .dashboard-content { flex-direction: column; overflow-y: auto; }
-    .sidebar { width: auto; border-right: none; }
-    body { overflow: auto; }
+.ticker-wrapper {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 40s linear infinite;
 }
+
+.ticker-wrapper span {
+    font-size: 1.3rem;
+    color: var(--cyan);
+    margin-right: 100px;
+    text-shadow: 0 0 5px var(--cyan-glow);
+}
+
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+h1 { font-size: 2.2rem; color: #fff; text-align: center; }
+.label { color: rgba(168, 216, 216, 0.6); font-size: 1.2rem; }
+footer { border-top: 1px solid var(--cyan); padding: 10px; text-align: center; font-size: 0.8rem; }
