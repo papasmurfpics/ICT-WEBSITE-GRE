@@ -15,8 +15,14 @@
 
     <div class="terminal-window">
         <header class="card-header">
-            <span>SYSTEM_OS [VER_12.0]</span>
-            <span>STATUS: ONLINE</span>
+            <div class="header-left">
+                <span>SYSTEM_OS [VER_12.0]</span>
+                <span id="live-clock" style="margin-left: 20px; color: #fff;">00:00:00</span>
+            </div>
+            <div class="header-right">
+                <span id="coordinates">LOC: 47.9188° N, 106.9175° E</span>
+                <span style="margin-left: 20px;">STATUS: ONLINE</span>
+            </div>
         </header>
         <div class="dashboard-content">
             <aside class="sidebar">
@@ -37,12 +43,13 @@
     </div>
 
     <script>
+      // TYPEWRITER SCRIPT
       const terminal = document.getElementById('typewriter-logs');
       const text = "> INITIALIZING_SYSTEM... [OK]\n" +
                    "> WELCOME, USER. ALL SYSTEMS ARE FUNCTIONAL.\n" +
                    "> AUTHORIZATION GRANTED TO THE ABOVE USER.\n\n" +
                    "> LOADING PORTFOLIO DATA...\n" +
-                   "> THIS PORTFOLIO REPRESENTS THE TERMINAL INTERFACE FOR ICT.";
+                   "> ACCESSING ULAANBAATAR CENTRAL HUB...";
 
       let i = 0;
       function typeWriter() {
@@ -53,6 +60,23 @@
         }
       }
       typeWriter();
+
+      // LIVE CLOCK SCRIPT
+      function updateClock() {
+        const now = new Date();
+        const timeString = now.getHours().toString().padStart(2, '0') + ":" + 
+                           now.getMinutes().toString().padStart(2, '0') + ":" + 
+                           now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('live-clock').innerText = "SYS_TIME: " + timeString;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // COORDINATE FLICKER SCRIPT (Makes them look like they are searching)
+      setInterval(() => {
+        const coords = document.getElementById('coordinates');
+        coords.style.opacity = Math.random() > 0.9 ? "0.5" : "1";
+      }, 100);
     </script>
 </body>
 </html>
