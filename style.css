@@ -57,6 +57,7 @@ nav a:hover, nav a.active {
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 .card-header {
@@ -72,9 +73,9 @@ nav a:hover, nav a.active {
 
 .dashboard-content { display: flex; flex: 1; overflow: hidden; }
 
-/* SIDEBAR & GIF */
+/* SIDEBAR: Profile Picture */
 .sidebar {
-    width: 320px;
+    width: 300px;
     padding: 30px;
     border-right: 1px solid rgba(255, 255, 255, 0.05);
     background: rgba(0, 0, 0, 0.2);
@@ -82,60 +83,97 @@ nav a:hover, nav a.active {
 
 .photo-box {
     width: 100%;
-    aspect-ratio: 1/1;
     border: 1px solid var(--border-glow);
     background: #000;
     position: relative;
-    overflow: hidden;
     margin-bottom: 20px;
+}
+
+.photo-box img {
+    width: 100%;
+    display: block;
+    filter: grayscale(0.2) brightness(1.1);
+}
+
+/* MAIN DISPLAY: Scanner GIF on Right */
+.main-display { 
+    flex: 1; 
+    padding: 40px; 
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.scanner-container {
+    position: relative;
+    width: 100%;
+    max-width: 380px; /* Forces GIF to stay professional size */
+    border: 1px solid var(--border-glow);
+    background: rgba(0, 0, 0, 0.3);
+    margin-bottom: 25px;
+    overflow: hidden;
 }
 
 .display-gif {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    display: block;
     mix-blend-mode: screen; 
-    filter: brightness(1.2) contrast(1.1);
-    animation: holo-flicker 0.2s infinite alternate;
+    opacity: 0.9;
+    filter: brightness(1.2);
 }
 
-@keyframes holo-flicker {
-    from { opacity: 0.8; }
-    to { opacity: 1; }
+.scanner-bar {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: var(--cyber-blue);
+    box-shadow: 0 0 15px var(--cyber-blue);
+    animation: scan-line 4s linear infinite;
 }
 
-.label { font-size: 0.6rem; color: var(--bio-purple); letter-spacing: 3px; margin-top: 15px; }
-h1 { font-family: 'Orbitron'; font-size: 1.2rem; margin: 5px 0; color: #fff; }
+@keyframes scan-line {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+/* TEXT AREA */
+#typewriter-logs {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--detroit-white);
+    white-space: pre-wrap;
+    text-shadow: 0 0 5px rgba(0, 229, 255, 0.2);
+}
+
+.label { font-size: 0.6rem; color: var(--bio-purple); letter-spacing: 3px; }
+h1 { font-family: 'Orbitron'; font-size: 1.4rem; color: #fff; margin: 5px 0 15px 0; }
 
 /* TICKER */
 .news-ticker {
     width: 100%;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     border-top: 1px solid var(--border-glow);
-    padding: 10px 0;
+    padding: 12px 0;
 }
 
 .ticker-wrapper {
     display: inline-block;
     white-space: nowrap;
-    animation: ticker-scrolling 25s linear infinite;
+    animation: ticker-scroll 30s linear infinite;
 }
 
 .ticker-wrapper span {
-    padding: 0 40px;
-    font-size: 0.7rem;
+    padding: 0 50px;
+    font-size: 0.75rem;
     color: var(--cyber-blue);
-    text-shadow: 0 0 8px var(--cyber-blue);
+    text-shadow: 0 0 10px var(--cyber-blue);
+    font-weight: bold;
 }
 
-@keyframes ticker-scrolling {
+@keyframes ticker-scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
 }
 
-/* MAIN DISPLAY */
-.main-display { flex: 1; padding: 40px; overflow-y: auto; }
-#typewriter-logs { font-size: 1.1rem; line-height: 1.6; white-space: pre-wrap; }
-
-footer { padding: 10px; text-align: center; font-size: 0.6rem; opacity: 0.4; letter-spacing: 5px; }
+footer { padding: 15px; text-align: center; font-size: 0.6rem; opacity: 0.4; letter-spacing: 5px; }
