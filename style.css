@@ -75,6 +75,13 @@ nav a:hover, nav a.active {
     padding: 10px 20px;
     border-bottom: 1px solid var(--cyan);
     background: rgba(168, 216, 216, 0.1);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
 }
 
 .dashboard-content {
@@ -104,7 +111,7 @@ nav a:hover, nav a.active {
     width: 100%;
     height: auto; 
     display: block;
-    object-fit: contain; /* This keeps your photo from being cropped or squished */
+    object-fit: contain;
     filter: grayscale(1) contrast(1.2) sepia(1) hue-rotate(140deg);
 }
 
