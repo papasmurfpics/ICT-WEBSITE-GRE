@@ -1,161 +1,165 @@
-/* Import Modern Tech Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap');
 
 :root {
-    --cyan: #a8d8d8; /* Your Original Cyan */
-    --cyan-glow: rgba(168, 216, 216, 0.3);
-    --bg-dark: #02060a;
-    --glass-panel: rgba(10, 20, 30, 0.75);
-    --border-color: rgba(168, 216, 216, 0.2);
+    --wireframe-teal: #4db6ac;
+    --wireframe-pink: #ff4081;
+    --wireframe-purple: #7e57c2;
+    --bg-black: #000000;
+    --border-dim: rgba(255, 255, 255, 0.1);
 }
-
-* { box-sizing: border-box; }
 
 html, body {
     margin: 0; padding: 0;
     width: 100%; height: 100%;
-    background-color: var(--bg-dark);
-    /* Deep gradient for depth */
-    background: radial-gradient(circle at center, #0a1f24 0%, #02060a 100%);
-    color: #e0e6ed;
+    background-color: var(--bg-black);
+    color: #ffffff;
     font-family: 'JetBrains Mono', monospace;
     overflow: hidden;
 }
 
-/* THE TECH GRID BACKGROUND */
+/* 1. THE ARCHITECTURAL GRID */
 body::before {
     content: "";
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background-image: 
-        linear-gradient(rgba(168, 216, 216, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(168, 216, 216, 0.05) 1px, transparent 1px);
-    background-size: 45px 45px;
+        linear-gradient(var(--border-dim) 0.5px, transparent 0.5px),
+        linear-gradient(90deg, var(--border-dim) 0.5px, transparent 0.5px);
+    background-size: 100px 100px; /* Wider grid for a "Blueprint" feel */
     z-index: -1;
 }
 
-/* --- MODERN NAVIGATION --- */
+/* 2. MINIMALIST NAV */
 nav {
-    padding: 15px;
+    padding: 20px;
     display: flex;
     justify-content: center;
-    gap: 35px;
-    background: rgba(0, 0, 0, 0.6);
-    border-bottom: 1px solid var(--border-color);
-    backdrop-filter: blur(10px);
-    z-index: 100;
+    gap: 40px;
+    border-bottom: 1px solid var(--border-dim);
 }
 
 nav a {
     font-family: 'Orbitron', sans-serif;
-    color: rgba(168, 216, 216, 0.5);
+    color: rgba(255, 255, 255, 0.3);
     text-decoration: none;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    transition: 0.3s;
+    font-size: 0.7rem;
+    letter-spacing: 6px;
+    transition: 0.4s;
 }
 
 nav a:hover, nav a.active {
-    color: var(--cyan);
-    text-shadow: 0 0 10px var(--cyan);
+    color: var(--wireframe-teal);
+    text-shadow: 0 0 10px var(--wireframe-teal);
 }
 
-/* --- THE GLASS TERMINAL --- */
+/* 3. THE SPECIMEN CONTAINER */
 .terminal-window {
-    margin: 25px;
-    height: calc(100vh - 110px);
-    background: var(--glass-panel);
-    border: 1px solid var(--border-color);
-    backdrop-filter: blur(15px);
+    margin: 20px;
+    height: calc(100vh - 120px);
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-dim);
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+/* Corner Crosshairs (Like a camera viewfinder) */
+.terminal-window::before {
+    content: "+";
+    position: absolute;
+    top: 5px; left: 10px;
+    color: var(--wireframe-pink);
+    opacity: 0.5;
 }
 
 .card-header {
-    padding: 12px 20px;
-    background: rgba(168, 216, 216, 0.05);
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    color: var(--cyan);
-    letter-spacing: 1px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-dim);
+    color: var(--wireframe-teal);
+    font-size: 0.6rem;
+    letter-spacing: 5px;
+    background: linear-gradient(90deg, rgba(77, 182, 172, 0.05), transparent);
 }
 
 .dashboard-content { display: flex; flex: 1; overflow: hidden; }
 
-/* --- SIDEBAR --- */
+/* 4. SIDEBAR - BIO-DATA */
 .sidebar {
     width: 280px;
-    border-right: 1px solid var(--border-color);
-    padding: 25px;
-    background: rgba(0, 0, 0, 0.2);
+    border-right: 1px solid var(--border-dim);
+    padding: 30px;
 }
 
 .photo-box {
-    width: 100%;
-    border: 1px solid var(--border-color);
-    padding: 4px;
-    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--wireframe-purple);
+    padding: 2px;
+    background: #000;
 }
 
 .photo-box img {
     width: 100%;
-    filter: grayscale(0.5) contrast(1.1) brightness(0.8);
-    transition: 0.3s;
+    filter: saturate(1.2) contrast(1.2);
+    mix-blend-mode: screen; /* Blends the photo into the dark background */
 }
 
-.photo-box img:hover {
-    filter: grayscale(0) brightness(1);
-}
-
-/* --- MAIN CONTENT --- */
+/* 5. MAIN DISPLAY - ORGANIC GLOW */
 .main-display {
     flex: 1;
-    padding: 40px;
+    padding: 50px;
     overflow-y: auto;
-    background: linear-gradient(135deg, rgba(168, 216, 216, 0.02) 0%, transparent 100%);
+    /* Soft color bleeds from the orchid photo */
+    background: 
+        radial-gradient(circle at 90% 10%, rgba(255, 64, 129, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 10% 90%, rgba(126, 87, 194, 0.04) 0%, transparent 40%);
 }
 
 h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
-    color: var(--cyan);
-    margin-bottom: 20px;
-    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #fff;
+    letter-spacing: 10px;
+    margin-bottom: 40px;
+    border-left: 3px solid var(--wireframe-pink);
+    padding-left: 20px;
 }
 
-/* Project List Modern Styling */
+/* Project Links: Thin Wireframe Boxes */
 .project-link {
-    background: rgba(168, 216, 216, 0.04);
-    border: 1px solid rgba(168, 216, 216, 0.1);
-    padding: 18px;
-    margin-bottom: 12px;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    background: transparent;
+    border: 1px solid var(--border-dim);
+    padding: 25px;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .project-link:hover {
-    background: rgba(168, 216, 216, 0.12);
-    border-color: var(--cyan);
-    transform: translateX(5px);
-    box-shadow: 0 0 20px var(--cyan-glow);
+    border-color: var(--wireframe-teal);
+    background: rgba(77, 182, 172, 0.02);
+    color: #fff;
+    padding-left: 40px; /* Dynamic "Slide" effect */
 }
 
-/* Footer */
+.label {
+    font-size: 0.55rem;
+    color: var(--wireframe-purple);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+}
+
 footer {
     padding: 10px;
     text-align: center;
-    font-size: 0.65rem;
-    color: rgba(168, 216, 216, 0.4);
-    border-top: 1px solid var(--border-color);
-    letter-spacing: 2px;
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: 12px;
+    text-transform: uppercase;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-thumb { background: var(--cyan); }
+/* Very thin "Wire" scrollbar */
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-thumb { background: var(--wireframe-pink); }
