@@ -1,164 +1,128 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal | Projects</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="screen-reflection"></div>
+    
+    <nav>
+        <a href="index.html" onmouseover="playHover()">01_HOME</a>
+        <a href="about.html" onmouseover="playHover()">02_ABOUT</a>
+        <a href="projects.html" class="active" onmouseover="playHover()">03_PROJECTS</a>
+    </nav>
 
-:root {
-    --cyan: #a8d8d8;
-    --cyan-glow: rgba(168, 216, 216, 0.3);
-    --dark: #020405;
-    --card-bg: #050a0d;
-}
+    <div class="terminal-window">
+        <header class="card-header">
+            <div class="header-left">
+                <span>DIRECTORY: /USER/DOCS/PROJECTS/</span>
+                <span id="live-clock" style="margin-left: 20px; color: #fff;">00:00:00</span>
+            </div>
+            <div class="header-right">
+                <span>FILES: 03_DETECTED</span>
+                <span style="margin-left: 20px;">STORAGE: 92%</span>
+            </div>
+        </header>
+        <div class="dashboard-content">
+            <aside class="sidebar">
+                <h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--cyan); width: 100%; text-align: center; padding-bottom: 10px;">FILE_INFO</h2>
+                <div id="project-meta" class="stats-box" style="width: 100%; margin-top: 20px;">
+                    <p class="label">SELECTED_FILE</p>
+                    <p id="meta-name">> NONE</p>
+                    <br>
+                    <p class="label">DATE_CREATED</p>
+                    <p id="meta-date">> --/--/----</p>
+                    <br>
+                    <p class="label">ENCRYPTION</p>
+                    <p id="meta-status">> INACTIVE</p>
+                </div>
+            </aside>
+            <main class="main-display">
+                <div id="typewriter-projects"></div>
+                <div id="project-list" style="margin-top: 20px; display: none;">
+                    <p style="cursor: pointer; color: #fff;" onclick="loadProject(1)">[📂] PROJECT_ALPHA_WEBSITE</p>
+                    <p style="cursor: pointer; color: #fff;" onclick="loadProject(2)">[📂] DATABASE_MANAGEMENT_SYS</p>
+                    <p style="cursor: pointer; color: #fff;" onclick="loadProject(3)">[📂] PYTHON_SECURITY_SCRIPT</p>
+                </div>
+            </main>
+        </div>
+        <footer>PROPERTY_OF_ULAANBAATAR_POLICE_DEPT_DETECTION_UNIT</footer>
+    </div>
 
-/* --- THE GLASS BOX EFFECT --- */
-html, body {
-    margin: 0; padding: 0;
-    width: 100%; height: 100%;
-    background-color: #000;
-    color: var(--cyan);
-    font-family: 'VT323', monospace;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
+    <script>
+      const typeSound = new Audio('https://codesandbox.io/api/v1/sandboxes/626z2/assets/typewriter.mp3');
+      const hoverSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
+      const selectSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3');
+      
+      typeSound.volume = 0.15;
+      hoverSound.volume = 0.1;
 
-/* 1. VIGNETTE & CURVE (The "Old Monitor" look) */
-body::after {
-    content: " ";
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: radial-gradient(circle, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.7) 100%);
-    pointer-events: none;
-    z-index: 100;
-}
+      const terminal = document.getElementById('typewriter-projects');
+      const list = document.getElementById('project-list');
+      
+      const welcomeText = "> SCANNING_STORAGE_DRIVE... [OK]\n" +
+                          "> FOUND 3 DOCUMENTS IN DIRECTORY.\n" +
+                          "> PLEASE SELECT A FILE TO VIEW DETAILS:\n";
 
-/* 2. SCANLINES & NOISE */
-body::before {
-    content: " ";
-    display: block;
-    position: fixed;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    z-index: 90;
-    background-size: 100% 3px, 3px 100%;
-    pointer-events: none;
-    opacity: 0.8;
-}
+      let i = 0;
+      function typeWriter() {
+        if (i < welcomeText.length) {
+          terminal.innerText += welcomeText.charAt(i);
+          if (welcomeText.charAt(i) !== " " && i % 2 === 0) {
+              typeSound.currentTime = 0;
+              typeSound.play().catch(e => {});
+          }
+          i++;
+          setTimeout(typeWriter, 30);
+        } else {
+            // Show the list of projects once typing is done
+            list.style.display = 'block';
+        }
+      }
+      setTimeout(typeWriter, 1000);
 
-/* Navigation */
-nav {
-    border-bottom: 1px solid rgba(168, 216, 216, 0.2);
-    display: flex; justify-content: center;
-    padding: 12px; z-index: 25;
-    background: rgba(0, 0, 0, 0.9);
-}
+      // Function to "Load" project details when clicked
+      function loadProject(id) {
+          selectSound.play().catch(e => {});
+          const metaName = document.getElementById('meta-name');
+          const metaDate = document.getElementById('meta-date');
+          const metaStatus = document.getElementById('meta-status');
+          
+          if(id === 1) {
+              terminal.innerText = "> LOADING: PROJECT_ALPHA...\n\nThis is my first ICT Web Project. It uses a custom CSS grid and retro terminal aesthetics to display user data.";
+              metaName.innerText = "> WEB_PORTFOLIO";
+              metaDate.innerText = "> 15/02/2026";
+              metaStatus.innerText = "> AES_256_ACTIVE";
+          } else if(id === 2) {
+              terminal.innerText = "> LOADING: DB_SYS...\n\nA database system designed to track officer IDs and case files within the Ulaanbaatar PD simulation.";
+              metaName.innerText = "> SQL_DATABASE";
+              metaDate.innerText = "> 01/03/2026";
+              metaStatus.innerText = "> READ_ONLY";
+          } else if(id === 3) {
+              terminal.innerText = "> LOADING: PY_SCRIPT...\n\nAutomated script for scanning network vulnerabilities and logging unauthorized access attempts.";
+              metaName.innerText = "> SECURITY_TOOL";
+              metaDate.innerText = "> 10/03/2026";
+              metaStatus.innerText = "> ENCRYPTED";
+          }
+      }
 
-nav a {
-    color: var(--cyan); text-decoration: none;
-    font-size: 1.6rem; margin: 0 20px;
-    letter-spacing: 2px;
-    opacity: 0.6;
-    transition: 0.3s;
-}
+      function playHover() {
+          hoverSound.currentTime = 0;
+          hoverSound.play().catch(e => {});
+      }
 
-nav a:hover, nav a.active {
-    opacity: 1;
-    color: #fff;
-    text-shadow: 0 0 8px var(--cyan);
-}
-
-/* Terminal Window */
-.terminal-window {
-    flex: 1; display: flex; flex-direction: column;
-    margin: 20px; 
-    border: 1px solid rgba(168, 216, 216, 0.2);
-    background: var(--card-bg);
-    position: relative; 
-    overflow: hidden;
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
-}
-
-.dashboard-content { display: flex; flex: 1; }
-
-/* Sidebar */
-.sidebar {
-    width: 260px; border-right: 1px solid rgba(168, 216, 216, 0.2);
-    padding: 25px;
-    background: rgba(0,0,0,0.2);
-}
-
-.photo-box {
-    border: 1px solid rgba(168, 216, 216, 0.3);
-    padding: 5px;
-    background: #000;
-}
-
-.photo-box img {
-    width: 100%; 
-    filter: grayscale(1) contrast(1.2) brightness(0.7) sepia(0.2);
-    mix-blend-mode: screen; /* Makes it look like a projection */
-}
-
-/* --- MAIN DISPLAY --- */
-.main-display {
-    flex: 1;
-    padding: 40px;
-    position: relative !important;
-    font-size: 1.8rem;
-    /* This creates the "Bloom" glow effect on text */
-    text-shadow: 0 0 5px rgba(168, 216, 216, 0.5);
-}
-
-/* Realistic GIF Styling */
-.main-display img {
-    position: absolute !important;
-    top: 30px !important;
-    right: 30px !important;
-    width: 120px !important;
-    height: auto !important;
-    z-index: 50 !important;
-    border: 1px solid rgba(168, 216, 216, 0.3);
-    filter: grayscale(1) brightness(0.8) opacity(0.8);
-    mix-blend-mode: lighten;
-}
-
-/* News Ticker (Slowed down for realism) */
-.news-ticker {
-    border-top: 1px solid rgba(168, 216, 216, 0.2);
-    overflow: hidden; white-space: nowrap; padding: 10px;
-    background: #000;
-}
-
-.ticker-wrapper {
-    display: inline-block;
-    animation: ticker 50s linear infinite;
-}
-
-.ticker-wrapper span { 
-    margin-right: 100px; 
-    font-size: 1.1rem; 
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-@keyframes ticker {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
-footer { 
-    border-top: 1px solid rgba(168, 216, 216, 0.1); 
-    text-align: center; 
-    padding: 8px; 
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    opacity: 0.4;
-}
-
-/* Header Text */
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background: rgba(168, 216, 216, 0.03);
-    border-bottom: 1px solid rgba(168, 216, 216, 0.1);
-    font-size: 0.8rem;
-}
+      function updateClock() {
+        const now = new Date();
+        const timeString = now.getHours().toString().padStart(2, '0') + ":" + 
+                           now.getMinutes().toString().padStart(2, '0') + ":" + 
+                           now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('live-clock').innerText = "SYS_TIME: " + timeString;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+    </script>
+</body>
+</html>
