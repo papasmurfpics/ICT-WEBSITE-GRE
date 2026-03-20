@@ -7,31 +7,95 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="screen-reflection"></div>
+    
     <nav>
-        <a href="index.html">01_HOME</a>
-        <a href="about.html" class="active">02_ABOUT</a>
-        <a href="projects.html">03_PROJECTS</a>
+        <a href="index.html" onmouseover="playHover()">01_HOME</a>
+        <a href="about.html" class="active" onmouseover="playHover()">02_ABOUT</a>
+        <a href="projects.html" onmouseover="playHover()">03_PROJECTS</a>
     </nav>
 
     <div class="terminal-window">
         <header class="card-header">
-            <span>DATA_ARCHIVE // DOSSIER</span>
-            <span>ENCRYPTION: ACTIVE</span>
+            <div class="header-left">
+                <span>USER_FILE: ERDENETSOGT_S</span>
+                <span id="live-clock" style="margin-left: 20px; color: #fff;">00:00:00</span>
+            </div>
+            <div class="header-right">
+                <span>RECORDS_DEPT</span>
+                <span style="margin-left: 20px;">ACCESS: GRANTED</span>
+            </div>
         </header>
         <div class="dashboard-content">
             <aside class="sidebar">
-                <p>FILE_TYPE: BIO</p>
-                <p>DEPT: COMPUTING</p>
+                <h2 style="font-size: 1.5rem; border-bottom: 1px solid var(--cyan); width: 100%; text-align: center; padding-bottom: 10px;">TECHNICAL_SKILLS</h2>
+                <div class="stats-box" style="width: 100%; margin-top: 20px;">
+                    <p class="label">PROGRAMMING</p>
+                    <p>> HTML5 / CSS3 [85%]</p>
+                    <p>> JAVASCRIPT [70%]</p>
+                    <br>
+                    <p class="label">SOFT_WARES</p>
+                    <p>> VS_CODE</p>
+                    <p>> PHOTOSHOP</p>
+                    <p>> GITHUB_CMD</p>
+                    <br>
+                    <p class="label">SPECIALIZATION</p>
+                    <p>> ICT_DEVELOPMENT</p>
+                </div>
             </aside>
             <main class="main-display">
-                <h2>// BACKGROUND</h2>
-                <p>I am a Grade 12 student specializing in web architecture and aesthetic design.</p>
-                <h2>// SKILLS</h2>
-                <p>> HTML/CSS [VERIFIED]</p>
-                <p>> GITHUB/DEPLOYMENT [STABLE]</p>
+                <div id="typewriter-about"></div>
             </main>
         </div>
-        <footer>END_OF_FILE</footer>
+        <footer>PROPERTY_OF_ULAANBAATAR_POLICE_DEPT_DETECTION_UNIT</footer>
     </div>
+
+    <script>
+      const typeSound = new Audio('https://codesandbox.io/api/v1/sandboxes/626z2/assets/typewriter.mp3');
+      const hoverSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
+      typeSound.volume = 0.15;
+      hoverSound.volume = 0.1;
+
+      // Update this text with your actual bio!
+      const terminal = document.getElementById('typewriter-about');
+      const text = "> LOADING_BIO_DATA...\n" +
+                   "> NAME: SUVD ERDENETSOGT\n" +
+                   "> ORIGIN: ULAANBAATAR, MONGOLIA\n" +
+                   "> OBJECTIVE: TO MASTER THE DIGITAL FRONTIER THROUGH ICT.\n\n" +
+                   "> I am a Grade 12 student passionate about technology and design. " +
+                   "This terminal interface represents my journey through coding and " +
+                   "system architecture. I believe that every line of code is a step " +
+                   "towards building a more connected future.\n\n" +
+                   "> END_OF_FILE.";
+
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          terminal.innerText += text.charAt(i);
+          if (text.charAt(i) !== " " && i % 2 === 0) {
+              typeSound.currentTime = 0;
+              typeSound.play().catch(e => {});
+          }
+          i++;
+          setTimeout(typeWriter, 30);
+        }
+      }
+      setTimeout(typeWriter, 1000);
+
+      function playHover() {
+          hoverSound.currentTime = 0;
+          hoverSound.play().catch(e => {});
+      }
+
+      function updateClock() {
+        const now = new Date();
+        const timeString = now.getHours().toString().padStart(2, '0') + ":" + 
+                           now.getMinutes().toString().padStart(2, '0') + ":" + 
+                           now.getSeconds().toString().padStart(2, '0');
+        document.getElementById('live-clock').innerText = "SYS_TIME: " + timeString;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+    </script>
 </body>
 </html>
