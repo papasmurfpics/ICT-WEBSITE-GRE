@@ -3,90 +3,116 @@
 :root {
     --cyan: #a8d8d8;
     --dark: #0a0a0a;
-    --card: #11181e;
+    --card-bg: #11181e;
 }
 
+/* 1. Make the body fill the entire screen */
 body {
     background-color: var(--dark);
     color: var(--cyan);
     font-family: 'VT323', monospace;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full viewport height */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    overflow: hidden; /* Prevents scrollbars for that "App" feel */
 }
 
-/* Nav Menu */
+/* 2. Full-width Navigation */
 nav {
-    width: 100%;
-    max-width: 450px;
-    border: 1px solid var(--cyan);
-    margin-bottom: 20px;
-    padding: 10px;
-    text-align: center;
+    border-bottom: 2px solid var(--cyan);
+    padding: 15px;
+    background: rgba(168, 216, 216, 0.05);
+    display: flex;
+    justify-content: space-around;
 }
 
 nav a {
     color: var(--cyan);
     text-decoration: none;
-    margin: 0 15px;
+    font-size: 1.5rem;
     text-transform: uppercase;
-    font-size: 1.2rem;
+    letter-spacing: 3px;
 }
 
-nav a.active {
+nav a:hover, nav a.active {
+    text-shadow: 0 0 10px var(--cyan);
     background: var(--cyan);
     color: var(--dark);
-    padding: 2px 5px;
+    padding: 0 10px;
 }
 
-/* Layout */
-.id-card {
+/* 3. The Main Terminal Container (Full Screen) */
+.terminal-window {
+    flex: 1; /* Fills the rest of the screen height */
+    margin: 20px;
     border: 2px solid var(--cyan);
-    width: 100%;
-    max-width: 450px;
-    padding: 20px;
-    background-color: var(--card);
+    background-color: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 0 20px rgba(168, 216, 216, 0.1);
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
+    padding: 10px 20px;
     border-bottom: 1px solid var(--cyan);
-    margin-bottom: 15px;
+    font-size: 1.2rem;
+    background: rgba(168, 216, 216, 0.1);
 }
 
-.profile-section {
+/* 4. Split Layout for wide screens */
+.dashboard-content {
     display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
+    flex: 1; /* Fills vertical space */
 }
 
+.sidebar {
+    width: 300px;
+    border-right: 1px solid var(--cyan);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-display {
+    flex: 1;
+    padding: 40px;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+/* Image styling */
 .photo-box img {
-    width: 140px;
+    width: 100%;
+    max-width: 250px;
     border: 1px solid var(--cyan);
     filter: grayscale(1) contrast(1.5) sepia(1) hue-rotate(140deg);
 }
 
-.stats h1 {
-    margin: 0;
-    color: white;
+.stats-box {
+    margin-top: 20px;
+    width: 100%;
+    text-align: left;
 }
 
-.bio-box, .project-item {
-    border: 1px solid var(--cyan);
-    padding: 10px;
-    margin-top: 10px;
-}
-
-h2 {
-    border-bottom: 1px dotted var(--cyan);
-    font-size: 1.4rem;
-}
+.stats-box h1 { margin: 0; color: #fff; font-size: 2.5rem; }
 
 footer {
-    margin-top: 15px;
+    border-top: 1px solid var(--cyan);
+    padding: 10px;
     text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.7;
+    font-size: 1rem;
+    letter-spacing: 5px;
+}
+
+/* Mobile Fix: Stack elements on small screens */
+@media (max-width: 768px) {
+    .dashboard-content { flex-direction: column; overflow-y: auto; }
+    .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--cyan); }
+    body { overflow: auto; }
 }
