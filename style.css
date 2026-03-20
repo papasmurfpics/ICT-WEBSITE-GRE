@@ -156,3 +156,29 @@ h1 { font-size: 2.2rem; color: #fff; text-align: center; }
 .label { color: rgba(168, 216, 216, 0.6); font-size: 1.2rem; }
 footer { border-top: 1px solid var(--cyan); padding: 10px; text-align: center; font-size: 0.8rem; }
 }
+/* Custom GIF Styling */
+.display-gif {
+    float: right;
+    width: 280px; /* Adjust this to change the size */
+    height: auto;
+    margin-left: 25px;
+    margin-bottom: 20px;
+    border: 1px solid var(--cyan);
+    box-shadow: 0 0 20px var(--cyan-glow);
+    
+    /* Matches the GIF to your terminal's cyan color perfectly */
+    filter: grayscale(1) contrast(1.2) sepia(1) hue-rotate(140deg) brightness(1.1);
+    
+    /* Adds a subtle 'breathing' animation to the scan */
+    animation: scan-flicker 3s infinite alternate;
+}
+
+@keyframes scan-flicker {
+    0% { opacity: 0.85; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.02); }
+}
+
+/* Ensure the text wraps correctly around the GIF */
+#typewriter-logs {
+    overflow: hidden;
+}
