@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="screen-reflection"></div>
+    
     <nav>
         <a href="index.html" class="active" onmouseover="playHover()">01_HOME</a>
         <a href="about.html" onmouseover="playHover()">02_ABOUT</a>
@@ -16,7 +18,7 @@
     <div class="terminal-window">
         <header class="card-header">
             <div class="header-left">
-                <span>SYSTEM_OS [VER_12.0]</span>
+                <span class="glitch-text">SYSTEM_OS [VER_12.0]</span>
                 <span id="live-clock" style="margin-left: 20px; color: #fff;">00:00:00</span>
             </div>
             <div class="header-right">
@@ -28,11 +30,12 @@
             <aside class="sidebar">
                 <div class="photo-box">
                     <img src="images/profile.jpg" alt="Profile">
+                    <div class="scanline-overlay"></div>
                 </div>
                 <div class="stats-box">
-                    <p>RANK: OFFICER</p>
+                    <p class="label">RANK: OFFICER</p>
                     <h1>SUVD ERDENETSOGT</h1>
-                    <p>ID: 12B67-PX-2026</p>
+                    <p class="label">ID: 12B67-PX-2026</p>
                 </div>
             </aside>
             <main class="main-display">
@@ -43,48 +46,38 @@
     </div>
 
     <script>
-      // AUDIO SOURCES
       const typeSound = new Audio('https://codesandbox.io/api/v1/sandboxes/626z2/assets/typewriter.mp3');
       const hoverSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
-      
-      typeSound.volume = 0.2; // Keep it subtle
+      typeSound.volume = 0.15;
       hoverSound.volume = 0.1;
 
-      // TYPEWRITER SCRIPT
       const terminal = document.getElementById('typewriter-logs');
-      const text = "> INITIALIZING_SYSTEM... [OK]\n" +
-                   "> WELCOME, USER. ALL SYSTEMS ARE FUNCTIONAL.\n" +
-                   "> AUTHORIZATION GRANTED TO THE ABOVE USER.\n\n" +
-                   "> LOADING PORTFOLIO DATA...\n" +
-                   "> AUDIO_DRIVERS: LOADED [OK]\n" +
-                   "> ACCESSING ULAANBAATAR CENTRAL HUB...";
+      const text = "> INITIALIZING_REALISM_MODE... [OK]\n" +
+                   "> CALIBRATING_CRT_MONITOR... [DONE]\n" +
+                   "> WELCOME, OFFICER ERDENETSOGT.\n\n" +
+                   "> SECURITY_CLEARANCE: LEVEL_4\n" +
+                   "> DATA_ENCRYPTION: ACTIVE\n" +
+                   "> SYSTEM_READY_FOR_INPUT...";
 
       let i = 0;
       function typeWriter() {
         if (i < text.length) {
           terminal.innerText += text.charAt(i);
-          
-          // Play sound on every few characters to avoid "noise overlap"
           if (text.charAt(i) !== " " && i % 2 === 0) {
               typeSound.currentTime = 0;
-              typeSound.play().catch(e => {}); // Catch block prevents errors if browser blocks audio
+              typeSound.play().catch(e => {});
           }
-          
           i++;
           setTimeout(typeWriter, 40);
         }
       }
+      setTimeout(typeWriter, 1200);
 
-      // Start typewriter after a short delay
-      setTimeout(typeWriter, 1000);
-
-      // HOVER SOUND FUNCTION
       function playHover() {
           hoverSound.currentTime = 0;
           hoverSound.play().catch(e => {});
       }
 
-      // LIVE CLOCK SCRIPT
       function updateClock() {
         const now = new Date();
         const timeString = now.getHours().toString().padStart(2, '0') + ":" + 
@@ -95,11 +88,10 @@
       setInterval(updateClock, 1000);
       updateClock();
 
-      // COORDINATE FLICKER
       setInterval(() => {
         const coords = document.getElementById('coordinates');
-        coords.style.opacity = Math.random() > 0.9 ? "0.5" : "1";
-      }, 100);
+        coords.style.opacity = Math.random() > 0.95 ? "0.3" : "1";
+      }, 80);
     </script>
 </body>
 </html>
