@@ -2,8 +2,8 @@
 
 :root {
     --cyan: #a8d8d8;
+    --cyan-glow: rgba(168, 216, 216, 0.6); /* Transparent cyan for the glow */
     --dark: #0a0a0a;
-    --card-bg: #11181e;
 }
 
 /* Forces the browser to use every pixel available */
@@ -49,11 +49,8 @@ nav a.active {
 
 /* 2. The Full-Screen Terminal Window */
 .terminal-window {
-    flex-grow: 1; /* This pushes the window to the bottom of the screen */
-    display: flex;
-    flex-direction: column;
-    margin: 10px; /* Small gap from the edge for aesthetic */
-    border: 2px solid var(--cyan);
+   border: 2px solid var(--cyan);
+    box-shadow: 0 0 15px var(--cyan-glow), inset 0 0 10px var(--cyan-glow);
     background-color: var(--card-bg);
 }
 
@@ -95,9 +92,10 @@ nav a.active {
 
 /* Photo Styling */
 .photo-box img {
-    width: 100%;
-    border: 1px solid var(--cyan);
-    filter: grayscale(1) contrast(1.5) sepia(1) hue-rotate(140deg);
+border: 1px solid var(--cyan);
+    /* This adds a glow around your photo */
+    box-shadow: 0 0 15px var(--cyan-glow);
+    filter: grayscale(1) contrast(1.2) sepia(1) hue-rotate(140deg);
 }
 
 .stats-box h1 {
@@ -154,4 +152,37 @@ footer {
 @keyframes textFlicker {
     0% { opacity: 0.99; }
     100% { opacity: 1; }
+}
+/* Make the main headers glow */
+h1, h2, h3 {
+    color: #fff; /* White center makes the glow look more realistic */
+    text-shadow: 0 0 8px var(--cyan-glow), 0 0 15px var(--cyan-glow);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Make the navigation links glow when hovered */
+nav a:hover, nav a.active {
+    color: #fff;
+    text-shadow: 0 0 10px var(--cyan), 0 0 20px var(--cyan);
+    background: rgba(168, 216, 216, 0.2);
+}
+
+/* Make the terminal text have a subtle hum */
+.main-display, .sidebar {
+    text-shadow: 0 0 5px rgba(168, 216, 216, 0.3);
+}
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2; /* Sits on top of everything */
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none; /* Allows you to still click buttons underneath */
 }
